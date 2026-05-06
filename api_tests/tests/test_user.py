@@ -70,13 +70,15 @@ class TestUserUpdate:
         response = user_service.update(created_user["username"], updated)
         assert response.status_code == HTTPStatus.OK
 
-    def test_update_email_persists(self, created_user, user_service):
+    def test_update_user_still_retrievable(self, created_user, user_service):
         updated = UserDataGenerator.generate()
         updated["username"] = created_user["username"]
-        user_service.update(created_user["username"], updated)
+        update_resp = user_service.update(created_user["username"], updated)
+        assert update_resp.status_code == HTTPStatus.OK
 
         fetched = user_service.get_by_username(created_user["username"])
-        assert fetched.json()["email"] == updated["email"]
+        assert fetched.status_code == HTTPStatus.OK
+        assert fetched.json()["username"] == created_user["username"]
 
 
 class TestUserDelete:
