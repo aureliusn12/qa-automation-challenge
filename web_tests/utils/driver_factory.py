@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -21,5 +22,12 @@ class DriverFactory:
         options.add_argument("--disable-extensions")
         options.add_argument("--disable-infobars")
 
-        service = Service(ChromeDriverManager().install())
+        driver_path = ChromeDriverManager().install()
+        p = Path(driver_path)
+        if p.name.startswith("THIRD_PARTY_NOTICES"):
+            candidate = p.parent / "chromedriver"
+            if candidate.exists():
+                driver_path = str(candidate)
+
+        service = Service(executable_path=driver_path)
         return webdriver.Chrome(service=service, options=options)
