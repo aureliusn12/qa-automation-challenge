@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 
 from web_tests.pages.base_page import BasePage
 
@@ -13,7 +14,11 @@ class CheckoutStepOnePage(BasePage):
     _ERROR_MESSAGE = (By.CSS_SELECTOR, "[data-test='error']")
 
     def is_on_page(self) -> bool:
-        return self.URL_PATH in self.current_url()
+        try:
+            self.wait.until(EC.url_contains(self.URL_PATH))
+            return True
+        except Exception:
+            return False
 
     def fill_customer_info(
         self, first_name: str, last_name: str, zip_code: str

@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 
 from web_tests.pages.base_page import BasePage
 
@@ -12,7 +13,11 @@ class CartPage(BasePage):
     _CONTINUE_SHOPPING = (By.ID, "continue-shopping")
 
     def is_on_page(self) -> bool:
-        return self.URL_PATH in self.current_url()
+        try:
+            self.wait.until(EC.url_contains(self.URL_PATH))
+            return True
+        except Exception:
+            return False
 
     def get_item_count(self) -> int:
         return len(self.find_all(self._CART_ITEMS))
