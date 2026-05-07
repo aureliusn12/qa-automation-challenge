@@ -19,7 +19,7 @@ Projeto de automação de testes com duas suítes independentes no mesmo reposit
 | Linguagem | Python 3.11 |
 | Framework | pytest 7.4 |
 | Automação API | requests, jsonschema, Faker, python-dotenv |
-| Automação Web | Selenium 4, webdriver-manager |
+| Automação Web | Selenium 4 (Selenium Manager) |
 | Padrão Web | Page Object Model (POM) |
 | Padrão API | Service Layer Pattern |
 | Qualidade | flake8 |
@@ -43,8 +43,7 @@ qa-automation-challenge/
 │   ├── schemas/         → JSON Schema para validação de contrato
 │   ├── fixtures/        → Fixtures de dados reutilizáveis
 │   ├── utils/
-│   │   ├── request_helper.py    → HTTP client com logging centralizado
-│   │   └── logger.py
+│   │   └── request_helper.py    → HTTP client com logging centralizado
 │   ├── data/
 │   │   └── generators.py        → Faker: Pet, User, Order dinâmicos
 │   └── conftest.py      → Services (session-scoped) + recursos (function-scoped)
@@ -62,10 +61,8 @@ qa-automation-challenge/
 │   │   ├── checkout_step_one_page.py
 │   │   ├── checkout_step_two_page.py
 │   │   └── checkout_complete_page.py
-│   ├── fixtures/        → Page Object factories
 │   ├── utils/
-│   │   ├── driver_factory.py    → Chrome com suporte a headless
-│   │   └── logger.py
+│   │   └── driver_factory.py    → Chrome headless + popup suppression
 │   ├── data/
 │   │   └── test_data.py         → Credenciais e dados de teste
 │   └── conftest.py      → driver fixture + logged_in_driver + screenshot on failure
@@ -101,7 +98,6 @@ Test → InventoryPage.add_product("Sauce Labs Backpack")
 | `click(locator)` | Espera clicável, depois clica |
 | `type_text(locator, text)` | Limpa e digita |
 | `is_visible(locator)` | Retorna `bool` — nunca levanta exceção |
-| `take_screenshot(name)` | Salva em `screenshots/` |
 
 ---
 
