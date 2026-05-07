@@ -50,8 +50,5 @@ class InventoryPage(BasePage):
         return 0
 
     def go_to_cart(self) -> None:
-        try:
-            self.click(self._CART_LINK)
-            self.wait.until(EC.url_contains("/cart.html"))
-        except Exception:
-            pass
+        self.click(self._CART_LINK)
+        self.wait.until(EC.url_contains("/cart.html"))

@@ -1,6 +1,4 @@
 import logging
-import os
-from datetime import datetime
 from typing import List, Tuple
 
 from selenium.webdriver.remote.webdriver import WebDriver
@@ -50,11 +48,3 @@ class BasePage:
 
     def current_url(self) -> str:
         return self.driver.current_url
-
-    def take_screenshot(self, name: str = "screenshot") -> str:
-        os.makedirs("screenshots", exist_ok=True)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        path = os.path.join("screenshots", f"{name}_{timestamp}.png")
-        self.driver.save_screenshot(path)
-        logger.info("Screenshot saved: %s", path)
-        return path

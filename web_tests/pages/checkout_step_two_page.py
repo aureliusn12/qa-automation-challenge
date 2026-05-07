@@ -9,7 +9,6 @@ class CheckoutStepTwoPage(BasePage):
 
     _CART_ITEMS = (By.CLASS_NAME, "cart_item")
     _ITEM_TOTAL = (By.CLASS_NAME, "summary_subtotal_label")
-    _TAX = (By.CLASS_NAME, "summary_tax_label")
     _TOTAL = (By.CLASS_NAME, "summary_total_label")
     _FINISH_BUTTON = (By.ID, "finish")
     _CANCEL_BUTTON = (By.ID, "cancel")
@@ -31,14 +30,8 @@ class CheckoutStepTwoPage(BasePage):
         return self.get_text(self._TOTAL)
 
     def finish_purchase(self) -> None:
-        try:
-            self.click(self._FINISH_BUTTON)
-            self.wait.until(EC.url_contains("/checkout-complete.html"))
-        except Exception:
-            pass
+        self.click(self._FINISH_BUTTON)
+        self.wait.until(EC.url_contains("/checkout-complete.html"))
 
     def cancel(self) -> None:
-        try:
-            self.click(self._CANCEL_BUTTON)
-        except Exception:
-            pass
+        self.click(self._CANCEL_BUTTON)

@@ -23,25 +23,13 @@ class CheckoutStepOnePage(BasePage):
     def fill_customer_info(
         self, first_name: str, last_name: str, zip_code: str
     ) -> "CheckoutStepOnePage":
-        try:
-            self.type_text(self._FIRST_NAME, first_name)
-        except Exception:
-            pass
-        try:
-            self.type_text(self._LAST_NAME, last_name)
-        except Exception:
-            pass
-        try:
-            self.type_text(self._ZIP_CODE, zip_code)
-        except Exception:
-            pass
+        self.type_text(self._FIRST_NAME, first_name)
+        self.type_text(self._LAST_NAME, last_name)
+        self.type_text(self._ZIP_CODE, zip_code)
         return self
 
     def continue_to_overview(self) -> None:
-        try:
-            self.click(self._CONTINUE_BUTTON)
-        except Exception:
-            pass
+        self.click(self._CONTINUE_BUTTON)
 
     def get_error_message(self) -> str:
         return self.get_text(self._ERROR_MESSAGE)

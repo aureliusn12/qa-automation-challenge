@@ -20,22 +20,13 @@ class CheckoutCompletePage(BasePage):
             return False
 
     def get_confirmation_header(self) -> str:
-        try:
-            return self.get_text(self._COMPLETE_HEADER)
-        except Exception:
-            return ""
+        return self.get_text(self._COMPLETE_HEADER)
 
     def get_confirmation_text(self) -> str:
-        try:
-            return self.get_text(self._COMPLETE_TEXT)
-        except Exception:
-            return ""
+        return self.get_text(self._COMPLETE_TEXT)
 
     def is_order_confirmed(self) -> bool:
         return self.get_confirmation_header() == self.EXPECTED_HEADER
 
     def go_back_home(self) -> None:
-        try:
-            self.click(self._BACK_HOME_BUTTON)
-        except Exception:
-            pass
+        self.click(self._BACK_HOME_BUTTON)
