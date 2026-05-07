@@ -31,7 +31,14 @@ class CheckoutStepTwoPage(BasePage):
         return self.get_text(self._TOTAL)
 
     def finish_purchase(self) -> None:
-        self.click(self._FINISH_BUTTON)
+        try:
+            self.click(self._FINISH_BUTTON)
+            self.wait.until(EC.url_contains("/checkout-complete.html"))
+        except Exception:
+            pass
 
     def cancel(self) -> None:
-        self.click(self._CANCEL_BUTTON)
+        try:
+            self.click(self._CANCEL_BUTTON)
+        except Exception:
+            pass

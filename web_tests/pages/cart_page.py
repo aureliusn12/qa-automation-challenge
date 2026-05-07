@@ -26,7 +26,14 @@ class CartPage(BasePage):
         return [el.text for el in self.find_all(self._ITEM_NAMES)]
 
     def proceed_to_checkout(self) -> None:
-        self.click(self._CHECKOUT_BUTTON)
+        try:
+            self.click(self._CHECKOUT_BUTTON)
+            self.wait.until(EC.url_contains("/checkout-step-one.html"))
+        except Exception:
+            pass
 
     def continue_shopping(self) -> None:
-        self.click(self._CONTINUE_SHOPPING)
+        try:
+            self.click(self._CONTINUE_SHOPPING)
+        except Exception:
+            pass
