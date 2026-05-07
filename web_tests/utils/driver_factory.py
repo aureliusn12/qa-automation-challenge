@@ -18,5 +18,12 @@ class DriverFactory:
         options.add_argument("--window-size=1920,1080")
         options.add_argument("--disable-extensions")
         options.add_argument("--disable-infobars")
+        options.add_argument("--disable-features=PasswordLeakDetection")
+
+        options.add_experimental_option("prefs", {
+            "credentials_enable_service": False,
+            "profile.password_manager_enabled": False,
+            "profile.password_manager_leak_detection": False,
+        })
 
         return webdriver.Chrome(options=options)
